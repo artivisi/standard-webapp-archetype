@@ -7,6 +7,7 @@ Deskripsi
 Archetype untuk membuat template project sesuai dengan [arsitektur standar ArtiVisi](https://bitbucket.org/endymuhardin/belajar-restful). 
 
 Project Structure : 
+
 *  Parent Project
    *  Konfigurasi Aplikasi
    *  Domain Model
@@ -54,6 +55,7 @@ mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtif
 ```
 
 Contohnya seperti ini : 
+
 ```
 mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtifactId=standard-webapp-archetype -DgroupId=com.coba -DartifactId=halo -Dversion=0.0.0-SNAPSHOT
 ```
