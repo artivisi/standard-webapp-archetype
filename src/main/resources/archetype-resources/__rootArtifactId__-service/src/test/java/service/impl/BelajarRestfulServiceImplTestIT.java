@@ -42,7 +42,7 @@ import ${package}.domain.ApplicationConfig;
 import ${package}.service.BelajarRestfulService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:com/artivisi/**/applicationContext.xml"})
+@ContextConfiguration(locations={"classpath*:${packageInPathFormat}/**/applicationContext.xml"})
 @TransactionConfiguration(defaultRollback=true)
 public class BelajarRestfulServiceImplTestIT {
 	@Autowired private BelajarRestfulService service;
