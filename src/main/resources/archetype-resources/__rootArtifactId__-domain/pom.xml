@@ -47,7 +47,7 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase-maven-plugin.version}</version>
                 <configuration>
-                    <changeLogFile>src/main/resources/com/artivisi/belajar/restful/db/db-changelog.xml</changeLogFile>
+                    <changeLogFile>src/main/resources/${packageInPathFormat}/db/db-changelog.xml</changeLogFile>
                     <driver>${db.driver}</driver>
                     <url>${db.url}/${db.name}</url>
                     <username>${db.username}</username>
