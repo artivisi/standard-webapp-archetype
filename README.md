@@ -62,3 +62,9 @@ mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtif
 
 Semua perintah tersebut dijalankan dalam satu baris.
 
+
+Credits
+-------
+
+Terima kasih buat [John Jiang Fang](http://johnjianfang.blogspot.com/2009/05/create-maven-archetype-from-existing.html) atas tutorialnya.
+
