@@ -1,7 +1,8 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-#set ( $packageAsDirectory = $package.replaceAll("\\.", "/") )
+#set($tmp="\\.") 
+#set($packagePath=$package.replaceAll($tmp.substring(1,3), "/")) 
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com> Licensed 
     under the Apache License, Version 2.0 (the "License"); you may not use this 
@@ -18,7 +19,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:${packageAsDirectory}/**/applicationContext.xml
+            classpath*:${packagePath}/**/applicationContext.xml
         </param-value>
     </context-param>
     <filter>

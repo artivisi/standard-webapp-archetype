@@ -1,7 +1,8 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-#set ( $packageAsDirectory = $package.replaceAll("\\.", "/") )
+#set($tmp="\\.") 
+#set($packagePath=$package.replaceAll($tmp.substring(1,3), "/")) 
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com> Licensed 
 	under the Apache License, Version 2.0 (the "License"); you may not use this 
@@ -37,7 +38,7 @@
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
-		p:dataSource-ref="dataSource" p:configLocations="classpath*:${packageAsDirectory}/**/hibernate.cfg.xml">
+		p:dataSource-ref="dataSource" p:configLocations="classpath*:${packagePath}/**/hibernate.cfg.xml">
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${symbol_dollar}{hibernate.dialect}</prop>
