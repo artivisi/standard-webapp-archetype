@@ -12,7 +12,7 @@
 	governing permissions and limitations under the License. -->
 <included>
 
-	<logger name="com.artivisi" level="INFO">
+	<logger name="${package}" level="INFO">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</logger>

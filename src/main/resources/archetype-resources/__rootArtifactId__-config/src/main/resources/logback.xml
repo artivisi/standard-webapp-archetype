@@ -19,7 +19,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${symbol_dollar}{catalina.home:-.}/logs/belajar-${symbol_dollar}{stage:-development}.log</file>
+		<file>${symbol_dollar}{catalina.home:-.}/logs/${rootArtifactId}-${symbol_dollar}{stage:-development}.log</file>
 		<encoder>
 			<pattern>%d %-5level %logger{35} - %msg %n</pattern>
 		</encoder>

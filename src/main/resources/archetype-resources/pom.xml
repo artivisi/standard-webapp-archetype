@@ -59,7 +59,7 @@
 		<!-- konfigurasi database development -->
 		<db.driver>com.mysql.jdbc.Driver</db.driver>
 		<db.url>jdbc:mysql://localhost</db.url>
-		<db.name>belajar_development</db.name>
+		<db.name>${artifactId}_development</db.name>
 		<db.username>root</db.username>
 		<db.password>admin</db.password>
 
@@ -101,7 +101,7 @@
 				<!-- konfigurasi database -->
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<db.url>jdbc:mysql://localhost</db.url>
-				<db.name>belajar_testing</db.name>
+				<db.name>${artifactId}_testing</db.name>
 				<db.username>root</db.username>
 				<db.password>admin</db.password>
 
@@ -116,7 +116,7 @@
 				<appserver.deployer.url>http://${appserver.ipaddress}:${appserver.port.http}/manager/text</appserver.deployer.url>
 				<appserver.deployer.username>cargo</appserver.deployer.username>
 				<appserver.deployer.password>cargo</appserver.deployer.password>
-				<appserver.deployer.context>/belajar</appserver.deployer.context>
+				<appserver.deployer.context>/${artifactId}</appserver.deployer.context>
 			</properties>
 		</profile>
 

@@ -12,7 +12,7 @@
 	governing permissions and limitations under the License. -->
 <included>
 
-	<logger name="com.artivisi" level="WARN">
+	<logger name="${package}" level="WARN">
 		<appender-ref ref="FILE" />
 	</logger>
 
