@@ -5,7 +5,7 @@
 	<artifactId>${artifactId}</artifactId>
 	<packaging>pom</packaging>
 	<version>${version}</version>
-	<name>Belajar Aplikasi RESTful</name>
+	<name>TEMPLATE APLIKASI HARAP GANTI NAMANYA</name>
 	<inceptionYear>2011</inceptionYear>
 
 	<scm>

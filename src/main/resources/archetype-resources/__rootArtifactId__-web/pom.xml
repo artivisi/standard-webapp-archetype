@@ -10,7 +10,7 @@
 
 	<artifactId>${artifactId}</artifactId>
 	<packaging>war</packaging>
-	<name>RESTful Service</name>
+	<name>RESTful Web Service</name>
 
 
 	<dependencies>
