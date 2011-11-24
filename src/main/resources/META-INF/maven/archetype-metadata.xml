@@ -4,6 +4,32 @@
     name="belajar-restful"
     xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <requiredProperties>
+        <requiredProperty key="project-name"></requiredProperty>
+        <requiredProperty key="scm-browser">
+            <defaultValue>https://github.com/artivisi/belajar</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="scm-readonly">
+            <defaultValue>git://github.com/artivisi/belajar.git</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="scm-readwrite">
+            <defaultValue>git@github.com:artivisi/belajar.git</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="artifact-repo-host">
+            <defaultValue>forge.artivisi.com</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="artifact-repo-port-http">
+            <defaultValue>8080</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="artifact-repo-path-download">
+            <defaultValue>nexus/content/groups/public</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="artifact-repo-path-upload">
+            <defaultValue>/root/sonatype-work/nexus/storage</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+    
     <fileSets>
         <fileSet filtered="true" encoding="UTF-8">
             <directory>jenkins-jobs-configuration/jobs</directory>
