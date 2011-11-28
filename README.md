@@ -51,13 +51,7 @@ Cara menjalankan
 5.  Jalankan archetype untuk membuat project baru dengan command berikut
 
 ```
-mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtifactId=standard-webapp-archetype -DgroupId=NAMAPACKAGEANDA -DartifactId=NAMAARTIFACTANDA -Dversion=NOMERVERSIANDA
-```
-
-Contohnya seperti ini : 
-
-```
-mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtifactId=standard-webapp-archetype -DgroupId=com.coba -DartifactId=halo -Dversion=0.0.0-SNAPSHOT
+mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtifactId=standard-webapp-archetype
 ```
 
 Semua perintah tersebut dijalankan dalam satu baris.
