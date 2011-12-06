@@ -13,7 +13,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name></name>
         <refspec></refspec>
-        <url>https://bitbucket.org/endymuhardin/${artifactId}.git</url>
+        <url>${scm-readwrite}</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
