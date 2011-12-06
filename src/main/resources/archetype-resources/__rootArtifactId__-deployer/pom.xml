@@ -15,7 +15,7 @@
 	<properties>
 		<target.version>${project.version}</target.version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>nexus-artivisi</id>
@@ -60,8 +60,8 @@
 						<type>remote</type>
 						<deployables>
 							<deployable>
-								<groupId>com.artivisi.belajar</groupId>
-								<artifactId>belajar-restful-web</artifactId>
+								<groupId>${groupId}</groupId>
+								<artifactId>${rootArtifactId}-web</artifactId>
 								<type>war</type>
 								<properties>
 									<context>${appserver.deployer.context}</context>
