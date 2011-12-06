@@ -53,7 +53,7 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
   </rootModule>
-  <goals>clean install</goals>
+  <goals>clean deploy</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>false</usePrivateRepository>
