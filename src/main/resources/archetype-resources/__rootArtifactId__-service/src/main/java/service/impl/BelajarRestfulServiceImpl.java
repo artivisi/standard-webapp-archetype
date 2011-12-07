@@ -29,12 +29,13 @@ import org.springframework.util.StringUtils;
 import ${package}.domain.ApplicationConfig;
 import ${package}.service.BelajarRestfulService;
 
+@SuppressWarnings("unchecked")
 @Service("belajarRestfulService")
 @Transactional
 public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
 	@Autowired private SessionFactory sessionFactory;
-	
+
 	@Override
 	public void save(ApplicationConfig ac) {
 		sessionFactory.getCurrentSession().saveOrUpdate(ac);
@@ -42,16 +43,19 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
 	@Override
 	public void delete(ApplicationConfig ac) {
-		if(ac == null || ac.getId() == null) return;
+		if(ac == null || ac.getId() == null) {
+			return;
+		}
 		sessionFactory.getCurrentSession().delete(ac);
 	}
 
 	@Override
-	public ApplicationConfig findApplicationConfigByName(String name) {
-		if(!StringUtils.hasText(name)) return null;
-		return (ApplicationConfig) sessionFactory.getCurrentSession().createQuery("from ApplicationConfig ac where ac.name = :name")
-				.setString("name", name)
-				.uniqueResult();
+	public ApplicationConfig findApplicationConfigById(String id) {
+		if(!StringUtils.hasText(id)) {
+			return null;
+		}
+		return (ApplicationConfig) sessionFactory.getCurrentSession()
+				.get(ApplicationConfig.class, id);
 	}
 
 	@Override

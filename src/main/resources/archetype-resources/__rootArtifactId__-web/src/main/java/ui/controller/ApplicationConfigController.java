@@ -30,7 +30,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -47,69 +46,68 @@ import ${package}.ui.helper.Range;
 @Controller
 @RequestMapping("/config")
 public class ApplicationConfigController {
-	
-@Autowired private BelajarRestfulService belajarRestfulService;
-	
+
+    @Autowired private BelajarRestfulService belajarRestfulService;
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@RequestMapping("/{name}")
+
+	@RequestMapping("/{id}")
 	@ResponseBody
-	public ApplicationConfig findApplicationConfigByName(@PathVariable String name){
-		ApplicationConfig config = belajarRestfulService.findApplicationConfigByName(name);
+	public ApplicationConfig findApplicationConfigById(@PathVariable String id){
+		ApplicationConfig config = belajarRestfulService.findApplicationConfigById(id);
 		if(config == null){
 			throw new IllegalStateException();
 		}
 		return config;
 	}
-	
+
 	@RequestMapping(value="/", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@ModelAttribute ApplicationConfig config, HttpServletRequest request, HttpServletResponse response){
+    public void create(@RequestBody ApplicationConfig config, HttpServletRequest request, HttpServletResponse response){
 		belajarRestfulService.save(config);
 		String requestUrl = request.getRequestURL().toString();
-        URI uri = new UriTemplate("{requestUrl}{id}").expand(requestUrl, config.getName());
+        URI uri = new UriTemplate("{requestUrl}{id}").expand(requestUrl, config.getId());
         response.setHeader("Location", uri.toASCIIString());
 	}
-	
-	@RequestMapping(method=RequestMethod.PUT, value="/{name}")
+
+	@RequestMapping(method=RequestMethod.PUT, value="/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable String name, @RequestBody ApplicationConfig config){
-		ApplicationConfig a = belajarRestfulService.findApplicationConfigByName(name);
+	public void update(@PathVariable String id, @RequestBody ApplicationConfig config){
+		ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
 		if(a == null){
-			logger.warn("Config dengan nama [{}] tidak ditemukan", name);
+			logger.warn("Config dengan id [{}] tidak ditemukan", id);
 			throw new IllegalStateException();
 		}
 		config.setId(a.getId());
-		config.setName(name);
 		belajarRestfulService.save(config);
 	}
-	
-	@RequestMapping(method=RequestMethod.DELETE, value="/{name}")
+
+	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable String name){
-		ApplicationConfig a = belajarRestfulService.findApplicationConfigByName(name);
+	public void delete(@PathVariable String id){
+		ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
 		if(a == null){
-			logger.warn("Config dengan nama [{}] tidak ditemukan", name);
+			logger.warn("Config dengan id [{}] tidak ditemukan", id);
 			throw new IllegalStateException();
 		}
 		belajarRestfulService.delete(a);
 	}
-	
+
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	@ResponseBody
-	public List<ApplicationConfig> findAll(@RequestHeader(value="Range", required=false) String range, 
+	public List<ApplicationConfig> findAll(@RequestHeader(value="Range", required=false) String range,
 			HttpServletResponse response){
 		logger.debug("Range : [{}]", range);
-		
+
 		Range requestRange = Range.fromRequestHeader(range);
 		Long countAll = belajarRestfulService.countAllApplicationConfigs();
 		Range responseRange = new Range(requestRange.getFrom(), requestRange.getTo(), countAll);
 		response.setHeader("Content-Range", responseRange.toResponseHeader());
-		
+
 		return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom().longValue(), responseRange.getTo() - responseRange.getFrom());
 	}
-	
-	
+
+
 	@ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({IllegalStateException.class})
     public void handle() {

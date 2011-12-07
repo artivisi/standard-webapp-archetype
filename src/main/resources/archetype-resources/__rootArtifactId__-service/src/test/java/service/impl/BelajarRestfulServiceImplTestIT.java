@@ -49,22 +49,22 @@ import ${package}.service.BelajarRestfulService;
 public class BelajarRestfulServiceImplTestIT {
 	@Autowired private BelajarRestfulService service;
 	@Autowired private DataSource dataSource;
-	
+
 	@Before
 	public void resetDatabase() throws Exception {
 		Connection conn = dataSource.getConnection();
-		DatabaseOperation.CLEAN_INSERT.execute(new DatabaseConnection(conn), 
+		DatabaseOperation.CLEAN_INSERT.execute(new DatabaseConnection(conn),
 				new FlatXmlDataSetBuilder().build(new File("src/test/resources/sample-data.xml")));
 	}
-	
-	@Test public void testFindByName(){
-		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
+
+	@Test public void testFindById(){
+		ApplicationConfig ac = service.findApplicationConfigById("def456");
 		assertNotNull(ac);
 		assertEquals("applicationversion", ac.getName());
 		assertEquals("Application Version", ac.getLabel());
 		assertEquals("1.0", ac.getValue());
 	}
-	
+
 	@Test public void testSaveNew(){
 		ApplicationConfig ac = new ApplicationConfig();
 		ac.setName("base.path");
@@ -75,29 +75,29 @@ public class BelajarRestfulServiceImplTestIT {
 		assertEquals(Long.valueOf(countAll + 1), service.countAllApplicationConfigs());
 		assertNotNull(ac.getId());
 	}
-	
+
 	@Test public void testSaveExisting(){
-		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac = service.findApplicationConfigById("abc123");
 		assertNotNull(ac);
 		ac.setLabel("Versi Aplikasi");
 		ac.setValue("2.0");
 		service.save(ac);
-		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac1 = service.findApplicationConfigById("abc123");
 		assertNotNull(ac1);
 		assertEquals("Versi Aplikasi", ac1.getLabel());
 		assertEquals("2.0", ac1.getValue());
 	}
-	
+
 	@Test public void testDeleteExisting(){
-		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac = service.findApplicationConfigById("abc123");
 		assertNotNull(ac);
 		Long countAll = service.countAllApplicationConfigs();
 		service.delete(ac);
 		assertEquals(Long.valueOf(countAll - 1), service.countAllApplicationConfigs());
-		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac1 = service.findApplicationConfigById("applicationversion");
 		assertNull(ac1);
 	}
-	
+
 	@Test public void testFindAll(){
 		List<ApplicationConfig> result = service.findAllApplicationConfigs(0L, service.countAllApplicationConfigs().intValue());
 		assertTrue(result.size() > 0);

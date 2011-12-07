@@ -18,106 +18,108 @@
  */
 package ${package}.ui.controller;
 
-import static com.jayway.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-
+import static com.jayway.restassured.RestAssured.expect;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.with;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import groovyx.net.http.ContentType;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 
 import ${package}.domain.ApplicationConfig;
 
 public class ApplicationConfigControllerTestIT {
-	
-private String target = "http://localhost:10000/config/";
-	
+
+    private String target = "http://localhost:10000/config/";
+
 	@Test public void testSaveUpdateDelete(){
-		
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("name", "coba");
-		params.put("label", "Konfigurasi Percobaan");
-		params.put("value", "test");
-		
-		testSave(target, params);
-		testGetExistingByName("coba", "Konfigurasi Percobaan", "test");
-		testUpdateExisting("coba", "Konfigurasi Percobaan 001", "test123");
-		testGetExistingByName("coba", "Konfigurasi Percobaan 001", "test123");
-		testDeleteExistingByName("coba");
+
+		String id = testSave(target);
+		System.out.println("Id : "+id);
+		testGetExistingById(id, "coba", "Konfigurasi Percobaan", "test");
+		testUpdateExisting(id, "coba", "Konfigurasi Percobaan 001", "test123");
+		testGetExistingById(id, "coba", "Konfigurasi Percobaan 001", "test123");
+		testDeleteExistingById(id);
 	}
-	
-	private String testSave(String target, Map<String, String> params) {
-		String location = with().
-		parameters(params).
+
+	private String testSave(String target) {
+		ApplicationConfig config = new ApplicationConfig();
+		config.setName("coba");
+		config.setLabel("Konfigurasi Percobaan");
+		config.setValue("test");
+
+		String location =
+		given().
+		body(config).contentType(ContentType.JSON).
 		expect().
 		statusCode(201).
 		when().post(target).getHeader("Location");
-		
+
 		assertNotNull(location);
 		assertTrue(location.startsWith(target));
-		
+
 		String[] locationSplit = location.split("/");
 		String id = locationSplit[locationSplit.length - 1];
-		
+
 		return id;
 	}
-	
-	private void testGetExistingByName(String name, String label, String value){
+
+	private void testGetExistingById(String id, String name, String label, String value){
 		expect().
 		statusCode(200).
 		body(
-				"name", equalTo(name), 
-				"label", equalTo(label), 
+				"name", equalTo(name),
+				"label", equalTo(label),
 				"value", equalTo(value)
 		).
-		when().get(target+name);
+		when().get(target+id);
 	}
-	
-	private void testUpdateExisting(String name, String label, String value){
+
+	private void testUpdateExisting(String id, String name, String label, String value){
 		ApplicationConfig config = new ApplicationConfig();
 		config.setName(name);
 		config.setLabel(label);
 		config.setValue(value);
-		
+
 		given().body(config).contentType(ContentType.JSON).
 		expect().
 		statusCode(200).
-		when().put(target+name);
+		when().put(target+id);
 	}
-	
-	private void testDeleteExistingByName(String name){
+
+	private void testDeleteExistingById(String id){
 		expect().
 		statusCode(200).
-		when().delete(target+name);
-		
+		when().delete(target+id);
+
 		expect().
 		statusCode(404).
-		when().get(target+name);
+		when().get(target+id);
 	}
-	
+
 	@Test
-	public void testGetExistingConfigByName(){
+	public void testGetExistingConfigById(){
 		expect().
 		statusCode(200).
 		body(
-				"id", equalTo("abc123"), 
-				"name", equalTo("applicationname"), 
-				"label", equalTo("Application Name"), 
+				"id", equalTo("abc123"),
+				"name", equalTo("applicationname"),
+				"label", equalTo("Application Name"),
 				"value", equalTo("Belajar Restful")
 		).
-		when().get(target+"applicationname");
+		when().get(target+"abc123");
 	}
-	
+
 	@Test
-	public void testGetNonExistentConfigByName(){
+	public void testGetNonExistentConfigById(){
 		expect().
 		statusCode(404).
 		when().get(target+"/nonexistentconfig");
 	}
-	
+
 	@Test
 	public void testFindAll(){
 		with()
