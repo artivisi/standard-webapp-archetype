@@ -36,10 +36,12 @@
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
-		p:dataSource-ref="dataSource" p:configLocations="classpath*:${packageInPathFormat}/**/hibernate.cfg.xml">
+		p:dataSource-ref="dataSource">
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${symbol_dollar}{hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
 		<property name="packagesToScan" value="${package}.domain"/>
