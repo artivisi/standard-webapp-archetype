@@ -26,7 +26,7 @@
             <defaultValue>nexus/content/groups/public</defaultValue>
         </requiredProperty>
         <requiredProperty key="artifact-repo-path-upload">
-            <defaultValue>/root/sonatype-work/nexus/storage</defaultValue>
+            <defaultValue>nexus/content/repositories</defaultValue>
         </requiredProperty>
     </requiredProperties>
     
