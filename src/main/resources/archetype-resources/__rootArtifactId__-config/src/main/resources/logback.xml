@@ -19,13 +19,13 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${symbol_dollar}{catalina.home:-.}/logs/${rootArtifactId}-${symbol_dollar}{stage:-development}.log</file>
+		<file>${symbol_dollar}{catalina.home:-.}/logs/${rootArtifactId}-${symbol_dollar}{spring.profiles.active:-development}.log</file>
 		<encoder>
 			<pattern>%d %-5level %logger{35} - %msg %n</pattern>
 		</encoder>
 	</appender>
 
-	<include resource="logback-${symbol_dollar}{stage:-development}.xml"/>
+	<include resource="logback-${symbol_dollar}{spring.profiles.active:-development}.xml"/>
 
 </configuration>
 

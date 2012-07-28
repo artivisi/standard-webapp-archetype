@@ -19,7 +19,7 @@
 
 	<context:property-placeholder location="
 	classpath*:jdbc.properties,
-	classpath*:jdbc.${symbol_dollar}{stage}.properties
+	classpath*:jdbc.${symbol_dollar}{spring.profiles.active}.properties
 	" />
 
 	<tx:annotation-driven />
