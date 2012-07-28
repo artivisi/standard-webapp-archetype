@@ -17,6 +17,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:net/bull/javamelody/monitoring-spring.xml
             classpath*:${packageInPathFormat}/**/applicationContext.xml
         </param-value>
     </context-param>
@@ -33,6 +34,19 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <listener>
+	    <listener-class>net.bull.javamelody.SessionListener</listener-class>
+    </listener>
+    
+    <!-- Monitor aplikasi menggunakan javamelody -->
+	<filter>
+		<filter-name>monitoring</filter-name>
+		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>monitoring</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
     <!-- Reads request input using UTF-8 encoding -->
     <filter>

@@ -42,6 +42,12 @@
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>${javamelody.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.dbunit</groupId>

@@ -20,12 +20,4 @@ package ${package}.service;
 
 import java.util.List;
 
-import ${package}.domain.ApplicationConfig;
-
-public interface BelajarRestfulService extends MonitoredService {
-	void save(ApplicationConfig ac);
-	void delete(ApplicationConfig ac);
-	ApplicationConfig findApplicationConfigById(String id);
-	List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows);
-	Long countAllApplicationConfigs();
-}
+public interface MonitoredService {}

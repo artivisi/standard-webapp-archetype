@@ -27,5 +27,11 @@
 
 	<context:component-scan base-package="${package}.service.impl"/>
 
-	
+	<bean id="facadeMonitoringAdvisor" class="net.bull.javamelody.MonitoringSpringAdvisor">
+		<property name="pointcut">
+			<bean class="net.bull.javamelody.MonitoredWithInterfacePointcut">
+				<property name="interfaceName" value="${package}.service.MonitoredService" />
+			</bean>
+		</property>
+	</bean>
 </beans>
