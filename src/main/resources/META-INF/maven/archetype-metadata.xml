@@ -135,7 +135,5 @@
                 </fileSet>
             </fileSets>
         </module>
-        <module id="${rootArtifactId}-deployer" dir="__rootArtifactId__-deployer"
-            name="${rootArtifactId}-deployer" />
     </modules>
 </archetype-descriptor>

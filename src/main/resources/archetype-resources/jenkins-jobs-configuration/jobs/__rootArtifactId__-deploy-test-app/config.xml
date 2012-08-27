@@ -64,10 +64,10 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}-deployer</artifactId>
+    <artifactId>${artifactId}-web</artifactId>
   </rootModule>
-  <rootPOM>${artifactId}-deployer/pom.xml</rootPOM>
-  <goals>cargo:redeploy -Ptesting</goals>
+  <rootPOM>${artifactId}-web/pom.xml</rootPOM>
+  <goals>tomcat6:redeploy -Ptesting</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>false</usePrivateRepository>
