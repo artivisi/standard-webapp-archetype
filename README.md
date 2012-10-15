@@ -11,19 +11,19 @@ Project Structure :
 *  Parent Project
    *  Konfigurasi Aplikasi
    *  Domain Model
-   *  Service Implementation
-   *  Aplikasi Web RESTful
-   *  Tomcat Deployer
+   *  Implementasi Business Service
+   *  RESTful Web Service
    *  Konfigurasi Jenkins
 
 Teknologi yang digunakan
 ------------------------
 
 *  Java SDK 1.6
-*  Spring Framework 3.0.5
-*  Hibernate 3.6.0
+*  Spring Framework 3.1.2
+*  Spring Data JPA 1.1.0
+*  Hibernate 4.1.7
 *  MySQL 5.1
-*  Jetty 6.1.26
+*  Tomcat 6
 *  Maven 2.2.1
 *  Liquibase
 *  Rest-Assured

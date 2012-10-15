@@ -29,12 +29,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriTemplate;
@@ -96,16 +98,28 @@ public class ApplicationConfigController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	@ResponseBody
 	public List<ApplicationConfig> findAll(@RequestHeader(value="Range", required=false) String range,
+			@RequestParam(required=false) String search,
 			HttpServletResponse response){
 		logger.debug("Range : [{}]", range);
-
+		
 		Range requestRange = Range.fromRequestHeader(range);
-		Long countAll = belajarRestfulService.countAllApplicationConfigs();
-		Range responseRange = new Range(requestRange.getFrom(), requestRange.getTo(), countAll);
-		response.setHeader("Content-Range", responseRange.toResponseHeader());
-
-		return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom().longValue(),
-				(responseRange.getTo() - responseRange.getFrom()+1));
+		
+		if(StringUtils.hasText(search)){
+			Long countAll = belajarRestfulService.countApplicationConfigs(search);
+			Range responseRange = new Range(requestRange.getFrom(), requestRange.getTo(), countAll);
+			logger.debug("Response Range : {}", responseRange.toString());
+			response.setHeader("Content-Range", responseRange.toResponseHeader());
+			
+			return belajarRestfulService.findApplicationConfigs(search, responseRange.getFrom(), 
+					(responseRange.getTo() - responseRange.getFrom()+1));
+		} else {
+			Long countAll = belajarRestfulService.countAllApplicationConfigs();
+			Range responseRange = new Range(requestRange.getFrom(), requestRange.getTo(), countAll);
+			response.setHeader("Content-Range", responseRange.toResponseHeader());
+			
+			return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom() , 
+					(responseRange.getTo() - responseRange.getFrom()+1));
+		}
 	}
 
 
