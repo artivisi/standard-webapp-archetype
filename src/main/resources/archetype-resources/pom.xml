@@ -85,32 +85,6 @@
 		<artifact.repo.url>http://${artifact.repo.host}:${artifact.repo.port.http}/${artifact.repo.path.download}</artifact.repo.url>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>development</id>
-			<!-- default profile, ditulis sebagai penjelasan saja -->
-		</profile>
-
-		<profile>
-			<id>testing</id>
-			<properties>
-				<!-- konfigurasi database -->
-				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://localhost</db.url>
-				<db.name>${artifactId}_testing</db.name>
-				<db.username>root</db.username>
-				<db.password>admin</db.password>
-
-				<!-- konfigurasi application server -->
-				<appserver.config.name>tomcat6-testing</appserver.config.name>
-				<appserver.port.http>8080</appserver.port.http>
-				<appserver.deployment.context>/${artifactId}</appserver.deployment.context>
-			</properties>
-		</profile>
-
-	</profiles>
-
-
 	<dependencies>
 
 		<dependency>
