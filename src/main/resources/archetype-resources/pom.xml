@@ -62,8 +62,7 @@
 
 		<!-- konfigurasi database development -->
 		<db.driver>com.mysql.jdbc.Driver</db.driver>
-		<db.url>jdbc:mysql://localhost</db.url>
-		<db.name>${artifactId}_development</db.name>
+		<db.url><![CDATA[jdbc:mysql://localhost/${artifactId}_development?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></db.url>
 		<db.username>root</db.username>
 		<db.password>admin</db.password>
 
