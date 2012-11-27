@@ -2,7 +2,7 @@
 
 ## Deskripsi ##
 
-Archetype untuk membuat template project sesuai dengan [arsitektur standar ArtiVisi](https://bitbucket.org/endymuhardin/belajar-restful). 
+Archetype untuk membuat template project sesuai dengan [arsitektur standar ArtiVisi](https://github.com/endymuhardin/belajar-restful). 
 
 Project Structure : 
 
