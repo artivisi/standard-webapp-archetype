@@ -79,6 +79,7 @@
                     <directory>src/main/resources</directory>
                     <includes>
                         <include>**/*.xml</include>
+                        <include>**/*.csv</include>
                     </includes>
                 </fileSet>
             </fileSets>
@@ -127,10 +128,26 @@
                         <include>**/*.xml</include>
                     </includes>
                 </fileSet>
+                <fileSet>
+                    <directory>src/main/webapp</directory>
+                    <includes>
+                        <include>**/*.css</include>
+                        <include>**/*.js</include>
+                        <include>**/*.html</include>
+                        <include>**/*.png</include>
+                    </includes>
+                </fileSet>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/test/java</directory>
                     <includes>
                         <include>**/*.java</include>
+                    </includes>
+                </fileSet>
+                <fileSet>
+                    <directory>src/test/resources</directory>
+                    <includes>
+                        <include>**/*.pdf</include>
+                        <include>**/*.jpg</include>
                     </includes>
                 </fileSet>
             </fileSets>

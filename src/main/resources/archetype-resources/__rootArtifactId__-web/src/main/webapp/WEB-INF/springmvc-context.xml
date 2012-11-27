@@ -3,23 +3,32 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
 
-    <context:component-scan base-package="${package}.ui.controller" />
+	<context:component-scan base-package="${package}.ui.controller" />
 
-    <!-- Configures the @Controller programming model -->
-    <mvc:annotation-driven />
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.data.web.PageableArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
 
-    <!-- mengganti default servletnya Tomcat dan Jetty -->
-    <!-- ini diperlukan kalau kita mapping DispatcherServlet ke / -->
-    <!-- sehingga tetap bisa mengakses folder selain WEB-INF, misalnya img, 
-        css, js -->
-    <mvc:default-servlet-handler />
+	<!-- mengganti default servletnya Tomcat dan Jetty -->
+	<!-- ini diperlukan kalau kita mapping DispatcherServlet ke / -->
+	<!-- sehingga tetap bisa mengakses folder selain WEB-INF, misalnya img, 
+		css, js -->
+	<mvc:default-servlet-handler />
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- Maksimal Upload 10 MB -->
+		<property name="maxUploadSize" value="10000000" />
+	</bean>
 
 </beans>

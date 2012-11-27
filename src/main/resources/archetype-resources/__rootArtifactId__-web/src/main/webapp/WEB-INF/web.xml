@@ -3,42 +3,60 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:net/bull/javamelody/monitoring-spring.xml
             classpath*:${packageInPathFormat}/**/applicationContext.xml
+            /WEB-INF/spring-security.xml
         </param-value>
     </context-param>
-    
+
     <context-param>
-	        <param-name>spring.profiles.default</param-name>
-	        <param-value>development</param-value>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>development</param-value>
     </context-param>
-    
-    <filter>
-        <filter-name>httpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <listener>
-	    <listener-class>net.bull.javamelody.SessionListener</listener-class>
+        <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
-    
+    <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener>
+	
+    <!-- spring security filter -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+	
     <!-- Monitor aplikasi menggunakan javamelody -->
-	<filter>
-		<filter-name>monitoring</filter-name>
-		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>monitoring</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <filter>
+        <filter-name>monitoring</filter-name>
+        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>monitoring</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!-- Reads request input using UTF-8 encoding -->
     <filter>
@@ -58,7 +76,7 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
     <!-- Handles all requests into the application -->
     <servlet>
         <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
@@ -82,4 +100,12 @@
         <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
+    
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </web-app>

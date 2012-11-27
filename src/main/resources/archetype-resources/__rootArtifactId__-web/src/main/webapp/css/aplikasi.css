@@ -1,0 +1,19 @@
+.jumbotron {
+    text-align: center;
+}
+
+.marketing {
+    margin: 60px 0;
+}
+.marketing p + h4 {
+    margin-top: 28px;
+}
+#loading { 
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    display: none; 
+    background: gold; 
+    padding: 0.3em; 
+    font-weight: bold; 
+}​

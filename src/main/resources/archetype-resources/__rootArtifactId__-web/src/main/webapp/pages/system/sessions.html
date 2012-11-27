@@ -1,0 +1,27 @@
+<div class="span8 well-large">
+    <h1>Daftar User Session</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Permission</th>
+                <th>Session ID</th>
+                <th>Status</th>
+                <th><a ng-click="refresh()" class="btn"><i class="icon-refresh"></i> refresh</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="u in sessioninfo">
+                <td>{{u.username}}</td>
+                <td>{{u.permission}}</td>
+                <td>{{u.sessionid}}</td>
+                <td>{{u.status}}</td>
+                <td>
+                    <a ng-click="kick(u)" class="btn"><i class="icon-eject"></i> kick</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
