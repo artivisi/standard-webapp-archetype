@@ -1,8 +1,6 @@
-Archetype Standard Aplikasi Web
-===============================
+# Archetype Standard Aplikasi Web #
 
-Deskripsi
-----------------
+## Deskripsi ##
 
 Archetype untuk membuat template project sesuai dengan [arsitektur standar ArtiVisi](https://bitbucket.org/endymuhardin/belajar-restful). 
 
@@ -15,24 +13,31 @@ Project Structure :
    *  RESTful Web Service
    *  Konfigurasi Jenkins
 
-Teknologi yang digunakan
-------------------------
+## Teknologi yang digunakan ##
 
-*  Java SDK 1.6
-*  Spring Framework 3.1.2
-*  Spring Data JPA 1.1.0
-*  Hibernate 4.1.7
-*  MySQL 5.1
-*  Tomcat 6
-*  Maven 2.2.1
-*  Liquibase
-*  Rest-Assured
-*  Jacoco
-*  Sonar
-*  Jenkins
+### Framework dan Library ###
 
-Cara menyiapkan database
-------------------------
+* Spring Framework 3.1.3
+* Spring Security 3.1.3
+* Spring Data JPA 1.1.0
+* Hibernate 4.1.7
+* Joda Time 2.1
+* Logback 1.0.7
+* AngularJS 1.0.2
+* Twitter Bootstrap 2.2.1
+* jQuery 1.8.3
+
+### Tools ###
+
+* Build Tool : Maven 2
+* Database Schema : Liquibase 2.0.5
+* Unit Test Runner : Maven Surefire Plugin
+* Integration Test Runner : Maven Failsafe Plugin
+* Functional Test : Rest-Assured
+* Performance Monitoring : Javamelody 1.39.0
+* Application Server : Jetty 6.1.26
+
+## Cara menyiapkan database ##
 
 Archetype ini akan membuatkan konfigurasi database untuk 3 environment : development, testing, dan production sesuai nama artifact. 
 Contoh: nama artifact = halo. 
@@ -41,8 +46,7 @@ Maka konfigurasi database akan dibuatkan untuk 3 database, yaitu :
 *  halo_testing
 *  halo_live
 
-Cara menjalankan
-----------------
+## Cara menjalankan ##
 
 1.  Clone dulu repo ini ke local
 2.  Buka command prompt dan masuk ke dalam folder tempat clone
@@ -57,8 +61,7 @@ mvn archetype:generate -DarchetypeGroupId=com.artivisi.template -DarchetypeArtif
 Semua perintah tersebut dijalankan dalam satu baris.
 
 
-Credits
--------
+## Credits ##
 
 Terima kasih buat [John Jiang Fang](http://johnjianfang.blogspot.com/2009/05/create-maven-archetype-from-existing.html) atas tutorialnya.
 
