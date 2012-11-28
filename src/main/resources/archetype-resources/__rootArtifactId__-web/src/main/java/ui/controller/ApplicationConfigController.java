@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ import org.springframework.web.util.UriTemplate;
 import ${package}.domain.ApplicationConfig;
 import ${package}.service.BelajarRestfulService;
 import com.google.common.io.Files;
+import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
 @Controller
@@ -108,7 +110,7 @@ public class ApplicationConfigController {
 
     @RequestMapping(value = "/config", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody ApplicationConfig config, HttpServletRequest request, HttpServletResponse response) {
+    public void create(@RequestBody @Valid ApplicationConfig config, HttpServletRequest request, HttpServletResponse response) {
         belajarRestfulService.save(config);
         String requestUrl = request.getRequestURL().toString();
         URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, config.getId());
@@ -117,7 +119,7 @@ public class ApplicationConfigController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/config/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable String id, @RequestBody ApplicationConfig config) {
+    public void update(@PathVariable String id, @RequestBody @Valid ApplicationConfig config) {
         ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
         if (a == null) {
             logger.warn("Config dengan id [{}] tidak ditemukan", id);

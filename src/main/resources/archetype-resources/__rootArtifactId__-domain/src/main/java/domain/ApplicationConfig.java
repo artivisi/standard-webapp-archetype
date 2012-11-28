@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="c_application_config")
@@ -19,12 +21,21 @@ public class ApplicationConfig {
 	@GenericGenerator(name="system-uuid", strategy = "uuid2")
 	private String id;
 	
-	@Column(nullable=false, unique=true)
-	private String name;
+	@NotNull
+    @NotEmpty
 	@Column(nullable=false)
+	private String name;
+
+	@NotNull
+    @NotEmpty
+	@Column(nullable=false, unique=true)
 	private String label;
+
+	@NotNull
+    @NotEmpty
 	@Column(nullable=false)
 	private String value;
+	
 	public String getId() {
 		return id;
 	}

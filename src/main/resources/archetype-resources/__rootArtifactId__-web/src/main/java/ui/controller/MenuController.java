@@ -9,6 +9,7 @@ import java.net.URI;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class MenuController {
 
     @RequestMapping(value = "/menu", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Menu x, HttpServletRequest request, HttpServletResponse response) {
+    public void create(@RequestBody @Valid Menu x, HttpServletRequest request, HttpServletResponse response) {
         belajarRestfulService.save(x);
         String requestUrl = request.getRequestURL().toString();
         URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
@@ -58,7 +59,7 @@ public class MenuController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/menu/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable String id, @RequestBody Menu x) {
+    public void update(@PathVariable String id, @RequestBody @Valid Menu x) {
         Menu a = belajarRestfulService.findMenuById(id);
         if (a == null) {
             logger.warn("Menu dengan id [{}] tidak ditemukan", id);
