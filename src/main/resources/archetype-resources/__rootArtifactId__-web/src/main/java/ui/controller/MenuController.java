@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -40,12 +41,6 @@ public class MenuController {
             throw new IllegalStateException();
         }
         return x;
-    }
-    
-    @RequestMapping("/role/{id}/unselected-menu")
-    @ResponseBody
-    public List<Menu> findMenuNotInRole(@PathVariable String id) {
-        return belajarRestfulService.findMenuNotInRole(belajarRestfulService.findRoleById(id));
     }
 
     @RequestMapping(value = "/menu", method = RequestMethod.POST)
@@ -82,12 +77,8 @@ public class MenuController {
 
     @RequestMapping(value = "/menu", method = RequestMethod.GET)
     @ResponseBody
-    public List<Menu> findAll(
-            Pageable pageable,
-            HttpServletResponse response) {
-
-        return belajarRestfulService.findAllMenu(pageable).getContent();
-
+    public Page<Menu> findAll(Pageable pageable) {
+        return belajarRestfulService.findAllMenu(pageable);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

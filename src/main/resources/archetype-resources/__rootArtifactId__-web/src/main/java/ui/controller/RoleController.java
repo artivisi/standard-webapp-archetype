@@ -3,6 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.ui.controller;
 
+import ${package}.domain.Menu;
 import ${package}.domain.Permission;
 import ${package}.domain.Role;
 import ${package}.service.BelajarRestfulService;
@@ -48,6 +49,12 @@ public class RoleController {
     @ResponseBody
     public List<Permission> findPermissionNotInRole(@PathVariable String id) {
         return belajarRestfulService.findPermissionsNotInRole(belajarRestfulService.findRoleById(id));
+    }
+    
+    @RequestMapping("/role/{id}/unselected-menu")
+    @ResponseBody
+    public List<Menu> findMenuNotInRole(@PathVariable String id) {
+        return belajarRestfulService.findMenuNotInRole(belajarRestfulService.findRoleById(id));
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.POST)
