@@ -23,6 +23,7 @@
 			<groupId>${groupId}</groupId>
 			<artifactId>${rootArtifactId}-config</artifactId>
 			<version>${version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
