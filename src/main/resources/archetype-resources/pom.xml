@@ -61,6 +61,7 @@
 		<javamelody.version>1.39.0</javamelody.version>
 
 		<!-- konfigurasi database development -->
+		<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
 		<db.driver>com.mysql.jdbc.Driver</db.driver>
 		<db.url><![CDATA[jdbc:mysql://localhost/${artifactId}_development?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></db.url>
 		<db.username>root</db.username>

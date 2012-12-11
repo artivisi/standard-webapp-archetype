@@ -76,6 +76,8 @@
                         <phase>process-resources</phase>
                         <configuration>
                             <target>
+                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@hibernate.dialect@" value="${hibernate.dialect}"/>
+                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.driver@" value="${db.driver}"/>
                                 <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.url@" value="${db.url}"/>
                                 <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.username@" value="${db.username}"/>
                                 <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.password@" value="${db.password}"/>
