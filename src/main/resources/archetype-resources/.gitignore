@@ -20,3 +20,6 @@ build
 dist
 private
 
+# Idea
+.idea
+*.iml
