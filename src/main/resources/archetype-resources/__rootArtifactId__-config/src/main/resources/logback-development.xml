@@ -5,15 +5,23 @@
 <included>
 
 	<logger name="org.hibernate.type" level="TRACE">
-		<appender-ref ref="stdout" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</logger>
 
 	<logger name="org.hibernate.SQL" level="TRACE">
-		<appender-ref ref="stdout" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</logger>
 
-	<root level="DEBUG">
+	<logger name="${package}" level="DEBUG">
 		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</root>
 
 </included>

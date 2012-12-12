@@ -4,11 +4,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
 
-	<logger name="${package}" level="WARN">
-		<appender-ref ref="FILE" />
-	</logger>
-
-	<root level="WARN">
+	<root level="INFO">
 		<appender-ref ref="FILE" />
 	</root>
 

@@ -10,8 +10,16 @@
 		</encoder>
 	</appender>
 
-	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${symbol_dollar}{catalina.home:-.}/logs/${rootArtifactId}-${symbol_dollar}{spring.profiles.active:-development}.log</file>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- ganti file setiap jam -->
+			<fileNamePattern>
+				${symbol_dollar}{catalina.home:-.}/logs/%d{yyyy-MM-dd_HH}/${rootArtifactId}-${symbol_dollar}{spring.profiles.active:-development}.log
+			</fileNamePattern>
+
+			<!-- simpan file selama sebulan (24 * 31) -->
+			<maxHistory>384</maxHistory>
+		</rollingPolicy>
 		<encoder>
 			<pattern>%d %-5level %logger{35} - %msg %n</pattern>
 		</encoder>
