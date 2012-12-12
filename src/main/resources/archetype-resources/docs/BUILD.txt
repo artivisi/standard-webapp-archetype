@@ -1,0 +1,7 @@
+pandoc --template artivisi-template.tex  \
+--variable mainfont="Droid Serif" \
+--variable sansfont="Droid Sans" \
+--variable fontsize=12pt \
+--variable version=1.0 \
+--latex-engine=xelatex --toc -N \
+-o dokumentasi-teknis.pdf *md
