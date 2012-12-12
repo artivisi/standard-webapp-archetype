@@ -38,6 +38,12 @@
             </includes>
         </fileSet>
         <fileSet encoding="UTF-8">
+            <directory>docs</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
             <directory></directory>
             <includes>
                 <include>NOTICE</include>
