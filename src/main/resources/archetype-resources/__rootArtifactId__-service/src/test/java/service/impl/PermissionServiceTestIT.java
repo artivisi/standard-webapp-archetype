@@ -49,7 +49,7 @@ public class PermissionServiceTestIT {
         r.setId("staff");
         
         List<Permission> hasil = service.findPermissionsNotInRole(r);
-        assertEquals(new Integer(5), new Integer(hasil.size()));
+        assertEquals(new Integer(4), new Integer(hasil.size()));
         
         for (Permission permission : hasil) {
             if(permission.getId().equals("role-view")){

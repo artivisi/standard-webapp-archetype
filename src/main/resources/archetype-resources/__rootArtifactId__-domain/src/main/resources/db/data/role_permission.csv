@@ -8,7 +8,8 @@ superuser,menu-view
 superuser,menu-edit
 superuser,permission-view
 superuser,permission-edit
-staff,user-view,
-staff,role-view,
-staff,menu-view,
+staff,user
+staff,user-view
+staff,role-view
+staff,menu-view
 staff,permission-view
