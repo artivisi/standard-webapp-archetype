@@ -55,7 +55,7 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
         <guava.version>10.0.1</guava.version>
 		<liquibase-maven-plugin.version>2.0.5</liquibase-maven-plugin.version>
-		<maven-failsafe-plugin.version>2.10</maven-failsafe-plugin.version>
+		<maven-failsafe-plugin.version>2.12.4</maven-failsafe-plugin.version>
 		<rest-assured.version>1.7.2</rest-assured.version>
 		<javamelody.version>1.39.0</javamelody.version>
 
