@@ -4,7 +4,6 @@ import ${package}.domain.Permission;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.with;
 import com.jayway.restassured.authentication.FormAuthConfig;
-import groovyx.net.http.ContentType;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertNotNull;
@@ -24,7 +23,8 @@ public class PermissionControllerTestIT {
         
         given()
             .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
-            .body(u).contentType(ContentType.JSON)
+            .contentType("application/json")
+            .body(u)
             .expect().statusCode(400).when().post(target);
     }
 
@@ -50,7 +50,8 @@ public class PermissionControllerTestIT {
     private String testSave(String target, Permission x) {
         String location = given()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
-                .body(x).contentType(ContentType.JSON)
+                .contentType("application/json")
+                .body(x)
                 .expect().statusCode(201).when().post(target)
                 .getHeader("Location");
 
@@ -76,7 +77,9 @@ public class PermissionControllerTestIT {
 
         given()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
-                .body(x).contentType(ContentType.JSON).expect()
+                .contentType("application/json")
+                .body(x)
+                .expect()
                 .statusCode(200).when().put(target + "/" + id);
     }
 
