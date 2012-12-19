@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import ${package}.service.BelajarRestfulService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,11 +18,15 @@ import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -31,6 +37,7 @@ public class HomepageController {
     
     @Autowired private BelajarRestfulService belajarRestfulService;
     @Autowired private SessionRegistry sessionRegistry;
+    @Autowired private MessageSource messageSource;
     
     @RequestMapping("/homepage/userinfo")
     @ResponseBody
@@ -54,6 +61,23 @@ public class HomepageController {
         }
         
         return hasil;
+    }
+
+    @RequestMapping("/homepage/appinfo") 
+    @ResponseBody 
+    public Map<String, String> appInfo(HttpServletRequest request){ 
+     
+        ApplicationContext ctx = WebApplicationContextUtils 
+                .getWebApplicationContext(request.getSession().getServletContext()); 
+     
+        Map<String, String> hasil = new HashMap<String, String>(); 
+     
+        hasil.put("profileDefault", StringUtils.arrayToCommaDelimitedString(ctx.getEnvironment().getDefaultProfiles())); 
+        hasil.put("profileActive", StringUtils.arrayToCommaDelimitedString(ctx.getEnvironment().getActiveProfiles())); 
+        hasil.put("namaAplikasi", messageSource.getMessage("app.name", null, "undefined", null)); 
+        hasil.put("versiAplikasi", messageSource.getMessage("app.version", null, "x.x.x", null)); 
+     
+        return hasil; 
     }
     
     @RequestMapping("/homepage/sessioninfo")
