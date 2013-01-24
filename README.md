@@ -23,8 +23,9 @@ Project Structure :
 * Hibernate 4.1.7
 * Joda Time 2.1
 * Logback 1.0.7
-* AngularJS 1.0.3
-* Twitter Bootstrap 2.2.1
+* AngularJS 1.0.4
+* AngularUI 0.3.2
+* Twitter Bootstrap 2.2.2
 * jQuery 1.8.3
 
 ### Tools ###
