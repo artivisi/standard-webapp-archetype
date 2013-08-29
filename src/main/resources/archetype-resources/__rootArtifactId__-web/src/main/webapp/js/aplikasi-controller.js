@@ -192,6 +192,12 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.baru = function(){
             $scope.currentRole = null;
             $scope.original = null;
+
+            $scope.unselectedPermission = [];
+            $scope.unselectedMenu = [];
+            
+            $scope.selectedPermission = [];
+            $scope.selectedMenu = [];
         }
         $scope.simpan = function(){
             RoleService.save($scope.currentRole)
