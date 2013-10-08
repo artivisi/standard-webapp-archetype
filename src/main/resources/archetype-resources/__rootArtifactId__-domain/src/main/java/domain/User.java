@@ -41,6 +41,9 @@ public class User {
     @Column(name = "fullname", nullable = false, unique = false)
     private String fullname;
 
+	@Column(name = "photo", nullable = false)
+    private String photo;
+    
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false)
@@ -94,5 +97,12 @@ public class User {
         this.role = role;
     }
 
+	public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
     
 }
