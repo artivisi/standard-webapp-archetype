@@ -17,20 +17,21 @@ Project Structure :
 
 ### Framework dan Library ###
 
-* Spring Framework 3.1.3
-* Spring Security 3.1.3
-* Spring Data JPA 1.1.0
-* Hibernate 4.1.7
-* Joda Time 2.1
-* Logback 1.0.7
-* AngularJS 1.0.4
-* AngularUI 0.3.2
-* Twitter Bootstrap 2.2.2
+* Spring Framework 4.0.0
+* Spring Security 3.2.0
+* Spring Data JPA 1.4.2
+* Hibernate 4.2.6
+* Joda Time 2.3
+* Logback 1.0.13
+* AngularJS 1.2.10
+* AngularUI 0.4.0
+* Twitter Bootstrap 3.1.0
 * jQuery 1.8.3
+* Underscore JS 1.5.2
 
 ### Tools ###
 
-* Build Tool : Maven 2
+* Build Tool : Maven 3
 * Database Schema : Liquibase 2.0.5
 * Unit Test Runner : Maven Surefire Plugin
 * Integration Test Runner : Maven Failsafe Plugin

@@ -1,4 +1,19 @@
-angular.module('belajar.controller',['belajar.service'])
+/*
+ * Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+angular.module('belajar.controller',['belajar.service','ngUpload'])
     .controller('LoginRedirectorController', ['$window', function($window){
         $window.location = 'login.html';
     }])
@@ -75,7 +90,7 @@ angular.module('belajar.controller',['belajar.service'])
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
         $scope.reloadMenupage = function(page){
-            if(!page) {
+            if(!page || page < 0) {
                 page = 0;
             }
 
@@ -192,10 +207,10 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.baru = function(){
             $scope.currentRole = null;
             $scope.original = null;
-
+        
             $scope.unselectedPermission = [];
             $scope.unselectedMenu = [];
-            
+
             $scope.selectedPermission = [];
             $scope.selectedMenu = [];
         }
@@ -265,6 +280,8 @@ angular.module('belajar.controller',['belajar.service'])
         
         $scope.saveSelectedPermission = function(){
             console.log($scope.selectedPermission);
+            if($scope.selectedPermission.length<1) return;
+            
             for ( var i = 0; i < $scope.selectedPermission.length; i++) {
                 var p = {id: $scope.selectedPermission[i]};
                 $scope.currentRole.permissionSet.push(p);
@@ -279,13 +296,13 @@ angular.module('belajar.controller',['belajar.service'])
                     });
                 });
             });
-            $scope.showPermissionDialog = false;
+            $('#dialogPermission').modal('hide');
         }
         
         $scope.cancelSelectedPermission = function(){
             $scope.selectedPermission = [];
             console.log($scope.selectedPermission);
-            $scope.showPermissionDialog = false;
+            $('#dialogPermission').modal('hide');
         }
 
         $scope.removeSelectedPermission = function(x){
@@ -346,6 +363,7 @@ angular.module('belajar.controller',['belajar.service'])
         
         $scope.saveSelectedMenu = function(){
             console.log($scope.selectedMenu);
+            if($scope.selectedMenu.length<1) return;
             for ( var i = 0; i < $scope.selectedMenu.length; i++) {
                 var p = {id: $scope.selectedMenu[i]};
                 $scope.currentRole.menuSet.push(p);
@@ -360,13 +378,13 @@ angular.module('belajar.controller',['belajar.service'])
                     });
                 });
             });
-            $scope.showMenuDialog = false;
+            $('#dialogMenu').modal('hide');
         }
         
         $scope.cancelSelectedMenu = function(){
             $scope.selectedMenu = [];
             console.log($scope.selectedMenu);
-            $scope.showMenuDialog = false;
+            $('#dialogMenu').modal('hide');
         }
 
         $scope.removeSelectedMenu = function(x){
@@ -414,11 +432,22 @@ angular.module('belajar.controller',['belajar.service'])
             if($scope.currentUser.active == null){
                 $scope.currentUser.active = false;
             }
-            UserService.save($scope.currentUser)
+            var obj = $scope.currentUser;
+            delete obj.uploadError;
+            console.log("Save obj ", obj);
+            UserService.save(obj)
             .success(function(){
                 $scope.users = UserService.query();
                 $scope.baru();
             });
+        }
+        $scope.uploadComplete = function(content, completed){
+            if (completed) {
+                $scope.currentUser.uploadError = content.msg + "  [" + content.status + "]";
+                if(content.status=="200"){
+                    $scope.simpan();
+                }
+            }
         }
         $scope.remove = function(x){
             if(x.id == null){
